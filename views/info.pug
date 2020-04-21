@@ -1,0 +1,51 @@
+html
+    head
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap")
+    body
+        .wrapper
+            h1
+                | Here is the page for information.
+            h3
+                | If you want some more info you will have to wait.
+
+        p(id='paragraph')
+            | If you want to go to our home page click the button 'Home page' below.
+
+        a(href='./' id='home-page')
+            input(type='button' value='Home page')
+
+        style.
+            body {
+                margin: 0;
+                background-color: #222;
+                color: #fafafa;
+            }
+
+            .wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            h1 {
+                margin: 0;
+                font-weight: normal;
+                font-size: 70px;
+            }
+            .wrapper h3 {
+                position: relative;
+                bottom: -10vh;
+                right: 10vh;
+            }
+
+            #paragraph {
+                position: absolute;
+                top: -12px;
+                left: 5px;
+            }
+
+            #home-page {
+                position: absolute;
+                top: 25px;
+                left: 20px;
+            }
