@@ -1,30 +1,28 @@
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
-const routes = require('./routes/index');
-const session = require('express-session');
-
 const app = express();
+const port = 8000;
+const routes = require('./routes/wiki');
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug'); //wykorzytsanie silnika szablonów pug
-app.set(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+app.use('/login', routes);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.get('/', (req, res) => {
+   res.render("index.ejs")
+});
+app.get('/login', (req, res) => {
+   res.render('login.ejs');
+});
+app.get('/register', (req, res) => {
+   res.render('register.ejs');
+});
+app.get('/blog', (req, res) => {
+   res.render('blog.ejs');
+});
 
-app.use(session({
-    secret: 'dog hero',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {}
-}));
+// app.set(__dirname,'/views');
+app.set('view engine', 'ejs');
 
-app.use(flash());
+app.listen(port, () => {
+   console.log(`Listening on port ${port}`)
+});
 
-app.use('/', routes);
-
-module.exports = app;
